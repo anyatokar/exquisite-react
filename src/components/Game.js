@@ -9,47 +9,46 @@ const Game = () => {
   const [lines, setLines] = useState([])
 
   const addLine = (line) => {
- 
-    const newLines = [...lines]
+    const newLines = [
+      ...lines,
+    ];
 
-    // lines.push(exampleFormat(newLine))
+    const newLine = [
+      ...line,
+    ];
 
+    const newLineString = lineFormat(newLine)
 
-    // setLines(temp)
+    newLines.push(newLineString);
 
-
-
-
-
-
-  //   const newFields = [...FIELDS];
-
-  //   // Find the max id and add 1
-  //   const nextId = newFields.reduce((accumulator, currentStudent) => {
-  //     return Math.max(accumulator, currentStudent.id);
-  //   }, 0) + 1;
-
-  //   newFields.push({
-  //     id: nextId,
-  //     fullName: student.fullName,
-  //     email: student.email,
-  //     present: false,
-  //   });
-
-  //   setStudentList(newStudentList);
+    setLines(newLines);
   }
 
-
-
-
+  // consolidate the two methods below?
+  const lineFormat = (fieldsVersion) => fieldsVersion.map((field) => {
+      if (field.key) {
+      return field.userInput;
+    } else {
+      return field;
+    }
+  }).join(' ');
 
   const exampleFormat = (fieldsVersion) => fieldsVersion.map((field) => {
-    if (field.key) {
+      if (field.key) {
       return field.placeholder;
     } else {
       return field;
     }
   }).join(' ');
+
+
+  const [isSubmitted, setIsSubmitted] = useState(false)
+  
+  const onSubmission = () => {
+    setIsSubmitted(true)
+    setLines([])
+  }
+
 
   return (
     <div className="Game">
@@ -63,11 +62,11 @@ const Game = () => {
         { exampleFormat(FIELDS) }
       </p>
 
-      <RecentSubmission />
+      <RecentSubmission recentLine={lines.pop()}/>
 
-      <PlayerSubmissionForm fields={FIELDS} sendSubmission={addLine}/>
+      <PlayerSubmissionForm index={(lines.length + 1)} fields={FIELDS} sendSubmission={addLine}/>
 
-      <FinalPoem />
+      <FinalPoem isSubmitted={isSubmitted} submissions={lines} revealPoem={onSubmission}/>
 
     </div>
   );

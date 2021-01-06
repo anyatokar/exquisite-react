@@ -22,20 +22,9 @@ const PlayerSubmissionForm = (props) => {
 
   const onFormSubmit = (event) => {
     event.preventDefault();
-    // const [formData, updateFormData] = useState
 
     props.sendSubmission(formFields);
     setFormFields(props.fields);
-
-
-
-      // const [formData, updateFormData] = useState({
-      //   firstName: "",
-      //   lastName: "",
-      //   email: "",
-      //   password: ""
-      // });
-
   };
 
   const playerComponents = formFields.map((field, i) => {
@@ -56,7 +45,7 @@ const PlayerSubmissionForm = (props) => {
   });
   return (
     <div className="PlayerSubmissionForm">
-      <h3>Player Submission Form for Player #{  }</h3>
+      <h3>Player Submission Form for Player #{props.index}</h3>
 
       <form className="PlayerSubmissionForm__form" 
         onSubmit={onFormSubmit}
