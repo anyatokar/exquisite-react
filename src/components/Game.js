@@ -5,7 +5,45 @@ import FinalPoem from './FinalPoem';
 import RecentSubmission from './RecentSubmission';
 
 const Game = () => {
-  const exampleFormat = FIELDS.map((field) => {
+
+  const [lines, setLines] = useState([])
+
+  const addLine = (line) => {
+ 
+    const newLines = [...lines]
+
+    // lines.push(exampleFormat(newLine))
+
+
+    // setLines(temp)
+
+
+
+
+
+
+  //   const newFields = [...FIELDS];
+
+  //   // Find the max id and add 1
+  //   const nextId = newFields.reduce((accumulator, currentStudent) => {
+  //     return Math.max(accumulator, currentStudent.id);
+  //   }, 0) + 1;
+
+  //   newFields.push({
+  //     id: nextId,
+  //     fullName: student.fullName,
+  //     email: student.email,
+  //     present: false,
+  //   });
+
+  //   setStudentList(newStudentList);
+  }
+
+
+
+
+
+  const exampleFormat = (fieldsVersion) => fieldsVersion.map((field) => {
     if (field.key) {
       return field.placeholder;
     } else {
@@ -22,12 +60,12 @@ const Game = () => {
       <p>Please follow the following format for your poetry submission:</p>
 
       <p className="Game__format-example">
-        { exampleFormat }
+        { exampleFormat(FIELDS) }
       </p>
 
       <RecentSubmission />
 
-      <PlayerSubmissionForm />
+      <PlayerSubmissionForm fields={FIELDS} sendSubmission={addLine}/>
 
       <FinalPoem />
 
@@ -41,27 +79,33 @@ const FIELDS = [
   {
     key: 'adj1',
     placeholder: 'adjective',
+    userInput: '',
   },
   {
     key: 'noun1',
     placeholder: 'noun',
+    userInput: '',
   },
   {
     key: 'adv',
     placeholder: 'adverb',
+    userInput: '',
   },
   {
     key: 'verb',
     placeholder: 'verb',
+    userInput: '',
   },
   'the',
   {
     key: 'adj2',
     placeholder: 'adjective',
+    userInput: '',
   },
   {
     key: 'noun2',
     placeholder: 'noun',
+    userInput: '',
   },
   '.',
 ];

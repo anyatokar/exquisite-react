@@ -3,22 +3,66 @@ import PropTypes from 'prop-types';
 
 import './PlayerSubmissionForm.css';
 
-const PlayerSubmissionForm = () => {
+const PlayerSubmissionForm = (props) => {
+
+  const [formFields, setFormFields] = useState(props.fields)
+
+  const onFormFieldChange = (i, event) => {
+    const newFormFields = [
+      ...formFields,
+    ]
+
+    newFormFields[i] = {
+      ...newFormFields[i],
+      userInput: event.target.value
+    };
+
+    setFormFields(newFormFields);
+  }
+
+  const onFormSubmit = (event) => {
+    event.preventDefault();
+    // const [formData, updateFormData] = useState
+
+    props.sendSubmission(formFields);
+    setFormFields(props.fields);
+
+
+
+      // const [formData, updateFormData] = useState({
+      //   firstName: "",
+      //   lastName: "",
+      //   email: "",
+      //   password: ""
+      // });
+
+  };
+
+  const playerComponents = formFields.map((field, i) => {
+    if(typeof(field) === 'object') {
+      return (
+        <input
+        key={field.key}
+        placeholder={field.placeholder}
+        value={field.userInput}
+        name={field.key}
+        onChange={(event)=>{onFormFieldChange(i, event)}}
+        type="text" />
+      )
+    } else {
+      // this catches the "The" and "." etc.
+      return (field)
+    }
+  });
   return (
     <div className="PlayerSubmissionForm">
       <h3>Player Submission Form for Player #{  }</h3>
 
-      <form className="PlayerSubmissionForm__form" >
-
+      <form className="PlayerSubmissionForm__form" 
+        onSubmit={onFormSubmit}
+      >
         <div className="PlayerSubmissionForm__poem-inputs">
-
-          {
-            // Put your form inputs here... We've put in one below as an example
-          }
-          <input
-            placeholder="hm..."
-            type="text" />
-
+          {playerComponents}
         </div>
 
         <div className="PlayerSubmissionForm__submit">
