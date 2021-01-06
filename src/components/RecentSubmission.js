@@ -11,7 +11,9 @@ const RecentSubmission = (props) => {
       </div>
     )
   } else {
-  return('')
+  return (
+    null
+    )
   }
 }
 

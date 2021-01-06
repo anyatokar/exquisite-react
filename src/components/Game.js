@@ -34,7 +34,7 @@ const Game = () => {
   }).join(' ');
 
   const exampleFormat = (fieldsVersion) => fieldsVersion.map((field) => {
-      if (field.key) {
+    if (field.key) {
       return field.placeholder;
     } else {
       return field;
@@ -44,9 +44,12 @@ const Game = () => {
 
   const [isSubmitted, setIsSubmitted] = useState(false)
   
-  const onSubmission = () => {
+  const onSubmission = () =>  {
+
     setIsSubmitted(true)
-    setLines([])
+    // setLines([])
+
+
   }
 
 
@@ -64,7 +67,7 @@ const Game = () => {
 
       <RecentSubmission recentLine={lines.pop()}/>
 
-      <PlayerSubmissionForm index={(lines.length + 1)} fields={FIELDS} sendSubmission={addLine}/>
+      <PlayerSubmissionForm index={(lines.length + 1)} fields={FIELDS} sendSubmission={addLine} isSubmitted={isSubmitted}/>
 
       <FinalPoem isSubmitted={isSubmitted} submissions={lines} revealPoem={onSubmission}/>
 
