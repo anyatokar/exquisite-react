@@ -7,6 +7,7 @@ import RecentSubmission from './RecentSubmission';
 const Game = () => {
 
   const [lines, setLines] = useState([])
+  const [isSubmitted, setIsSubmitted] = useState(false)
 
   const addLine = (line) => {
     const newLines = [
@@ -24,7 +25,7 @@ const Game = () => {
     setLines(newLines);
   }
 
-  // consolidate the two methods below?
+  // can consolidate the two methods below as they are very similar
   const lineFormat = (fieldsVersion) => fieldsVersion.map((field) => {
       if (field.key) {
       return field.userInput;
@@ -42,15 +43,45 @@ const Game = () => {
   }).join(' ');
 
 
-  const [isSubmitted, setIsSubmitted] = useState(false)
   
-  const onSubmission = () =>  {
 
+  const onSubmission = () => {
     setIsSubmitted(true)
-    // setLines([])
+
+    // for(const line of lines) {
+    //   <div>
+    //     <input line />
+    //     <br></br>
+    //   </div>
+    // }
 
 
-  }
+
+  };
+
+  // const onSubmission = lines.map((line) => {
+  //   setIsSubmitted(true)
+  //   return (
+  //     <input line />
+  //     )
+  // });
+
+  // const playerComponents = formFields.map((field, i) => {
+  //   if(typeof(field) === 'object') {
+  //     return (
+  //       <input
+  //       key={field.key}
+  //       placeholder={field.placeholder}
+  //       value={field.userInput}
+  //       name={field.key}
+  //       onChange={(event)=>{onFormFieldChange(i, event)}}
+  //       type="text" />
+  //     )
+  //   } else {
+  //     // this catches the "The" and "." etc.
+  //     return (field)
+  //   }
+  // });
 
 
   return (
@@ -65,7 +96,7 @@ const Game = () => {
         { exampleFormat(FIELDS) }
       </p>
 
-      <RecentSubmission recentLine={lines.pop()}/>
+      <RecentSubmission submission={lines[lines.length - 1]} isSubmitted={isSubmitted}/>
 
       <PlayerSubmissionForm index={(lines.length + 1)} fields={FIELDS} sendSubmission={addLine} isSubmitted={isSubmitted}/>
 
