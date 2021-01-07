@@ -42,47 +42,9 @@ const Game = () => {
     }
   }).join(' ');
 
-
-  
-
   const onSubmission = () => {
     setIsSubmitted(true)
-
-    // for(const line of lines) {
-    //   <div>
-    //     <input line />
-    //     <br></br>
-    //   </div>
-    // }
-
-
-
   };
-
-  // const onSubmission = lines.map((line) => {
-  //   setIsSubmitted(true)
-  //   return (
-  //     <input line />
-  //     )
-  // });
-
-  // const playerComponents = formFields.map((field, i) => {
-  //   if(typeof(field) === 'object') {
-  //     return (
-  //       <input
-  //       key={field.key}
-  //       placeholder={field.placeholder}
-  //       value={field.userInput}
-  //       name={field.key}
-  //       onChange={(event)=>{onFormFieldChange(i, event)}}
-  //       type="text" />
-  //     )
-  //   } else {
-  //     // this catches the "The" and "." etc.
-  //     return (field)
-  //   }
-  // });
-
 
   return (
     <div className="Game">
@@ -105,7 +67,6 @@ const Game = () => {
     </div>
   );
 }
-
 
 const FIELDS = [
   'The',

@@ -44,7 +44,7 @@ const PlayerSubmissionForm = (props) => {
     }
   });
 
-  if(props.isSubmitted === false) {
+  if(!props.isSubmitted) {
     return (
       <div className="PlayerSubmissionForm">
         <h3>Player Submission Form for Player #{props.index}</h3>
